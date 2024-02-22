@@ -1,4 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
+require("dotenv").config()
 // require('hardhat-ethernal');
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -14,9 +15,18 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
+
+const INFURA_API_KEY = process.env.INFURA_API_KEY
+const ACCOUNT1_KEY = process.env.ACCOUNT_PRIVATE_KEY
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.7.6"
+  solidity: "0.7.6",
+  networks: {
+    arbitrumGoerli: {
+      url: `https://arbitrum-goerli.infura.io/v3/${INFURA_API_KEY}`,
+      accounts: [ACCOUNT1_KEY]
+    }
+  }
 };
